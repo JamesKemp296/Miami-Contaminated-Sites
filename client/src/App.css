@@ -1,4 +1,38 @@
+body{
+  background-color: #BBE2FE;
+}
 .background-wrapper {
   background-image: url('./assets/images/background.jpg');
-  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height: 40vh;
+  display: grid;
+  place-items: center;
+}
+.search-bar {
+  border: 0;
+  padding: 0.4rem;
+  font-size: 3vh;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 5px 10px 20px black;
+}
+.search-bar:focus{
+  outline-width: 0;
+}
+.outer-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  place-items: center;
+  grid-gap: 10px;
+  padding-top: 20px;
+}
+.inner-wrapper {
+  background-color: white;
+  width: 70vh;
+  padding: 0.5rem;
+  box-shadow: 5px 10px 20px black;
+  box-shadow: 5px 10px 20px black;
 }
