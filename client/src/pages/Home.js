@@ -49,15 +49,17 @@ class Home extends React.Component {
         {
           this.state.sites
           .map((site, index )=> (
-            <div id="wrapper" key={index}>
-              <h3>Status: {site.attributes.CLASSIFCTN}</h3>
-              <h3>Phase: {site.attributes.PHASE}</h3>
-              <h3>Lat: {site.attributes.LAT}</h3>
-              <h3>Lon: {site.attributes.LON}</h3>
-              <h3>Cleanup: {site.attributes.TASK_NAME}</h3>
-              <h3>Address: {site.attributes.HNUM} {site.attributes.PRE_DIR} {site.attributes.ST_NAME} {site.attributes.ST_TYPE}</h3>
-              <div className="line"></div> 
-            </div> 
+            <div className="outer-wrapper">
+              <div className="inner-wrapper" key={index}>
+                <h3>Status: {site.attributes.CLASSIFCTN}</h3>
+                <h3>Phase: {site.attributes.PHASE}</h3>
+                <h3>Lat: {site.attributes.LAT}</h3>
+                <h3>Lon: {site.attributes.LON}</h3>
+                <h3>Cleanup: {site.attributes.TASK_NAME}</h3>
+                <h3>Address: {site.attributes.HNUM} {site.attributes.PRE_DIR} {site.attributes.ST_NAME} {site.attributes.ST_TYPE}</h3>
+                <div className="line"></div> 
+              </div> 
+            </div>
           ))
         }
       </>
