@@ -3,14 +3,15 @@ import React from 'react'
 class Home extends React.Component {
   state = {
     sites: [],
-    totalResults: 0
+    totalResults: 0,
+    radiusMiles: 1
   }
   handleSearch = () => {
     //these values will be grabbed from the user later
     //default for testing
     const longitude = 25.7617
     const latitude = -80.1918
-    const radiusMiles = 1
+    const radiusMiles = this.state.radiusMiles
     const radiusDegrees = (radiusMiles/138)
     const minLongitude = longitude - radiusDegrees
     const maxLongitude = longitude + radiusDegrees
@@ -22,6 +23,10 @@ class Home extends React.Component {
       .then(data => this.setState({sites: data.features, totalResults: data.features.length}))  
   }
 
+  handleRadiusChange = event => {
+    this.setState({ radiusMiles: Number(event.target.value) })
+  }
+
   render(){
     return(
       <>
@@ -31,6 +36,14 @@ class Home extends React.Component {
            type="text"
            onChange={this.handleSearch}
           />
+          <select 
+          className="radius-dropbox"
+          value={this.state.radiusMiles}
+          onChange={this.handleRadiusChange}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          </select>
         </div>
           <h1>Total Results: {this.state.totalResults}</h1>
         {
