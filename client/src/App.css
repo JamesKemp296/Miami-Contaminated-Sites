@@ -1,15 +1,4 @@
-/* JUST FOR DEMO PURPORSES, REPLACE WITH YOUR OWN CODE */
-
-#demo{
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.background-wrapper {
+  background-image: url('./assets/images/background.jpg');
+  height: 400px;
 }
-
-#demo h1{
-  display: grid;
-  place-items: center;
-}
-
-/* END DEMO */
