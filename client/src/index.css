@@ -2,3 +2,27 @@ body {
   margin: 0;
   padding: 0;
 }
+
+li {
+  list-style: none;
+}
+
+.header {
+  position: left;
+  left: 0;
+  /* bottom: 0; */
+  width: 100%;
+  background-color: darkslategray;
+  color: white;
+  text-align: left;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: darkslategray;
+  color: white;
+  text-align: center;
+}
