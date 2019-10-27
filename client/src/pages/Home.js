@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Autocomplete from 'react-google-autocomplete';
+import axios from 'axios';
 
 class Home extends React.Component {
   state = {
@@ -7,21 +9,22 @@ class Home extends React.Component {
     totalResults: 0,
     radiusMiles: 1
   }
-  handleSearch = () => {
+  handleSearch = place => {
+    const [lat, lng] = [place.geometry.location.lat(), place.geometry.location.lng()];
     //these values will be grabbed from the user later
     //default for testing
-    const longitude = 25.7617
-    const latitude = -80.1918
     const radiusMiles = this.state.radiusMiles
     const radiusDegrees = (radiusMiles/138)
-    const minLongitude = longitude - radiusDegrees
-    const maxLongitude = longitude + radiusDegrees
-    const minLatitude = latitude - radiusDegrees
-    const maxLatitude = latitude + radiusDegrees
-    let url = `https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/ContaminatedSite_gdb/FeatureServer/0/query?where=1%3D1&outFields=*&geometry=${minLatitude}%2C${minLongitude}%2C${maxLatitude}%2C${maxLongitude}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&f=json`
-    fetch(url)
-      .then(response => response.json())
-      .then(data => this.setState({sites: data.features, totalResults: data.features.length}))  
+    const minLongitude = lng - radiusDegrees
+    const maxLongitude = lng + radiusDegrees
+    const minLatitude = lat - radiusDegrees
+    const maxLatitude = lat + radiusDegrees
+    const url = `/api/sites/${minLongitude}/${minLatitude}/${maxLongitude}/${maxLatitude}`
+    axios.get(url)
+    .then(response => {
+      const { data } = response;
+      this.setState({sites: data.features, totalResults: data.features.length})
+    })
   }
 
   handleRadiusChange = event => {
@@ -31,11 +34,14 @@ class Home extends React.Component {
   render(){
     return(
       <>
+ 			<div style={{ margin: '100px' }}>
+			</div>
         <div className="background-wrapper">
-          <input
-           className="search-bar"
-           type="text"
-           onChange={this.handleSearch}
+          <Autocomplete
+            style={{width: '90%'}}
+            onPlaceSelected={this.handleSearch}
+            types={['address']}
+            componentRestrictions={{ country: 'us' }}
           />
           <select 
           className="radius-dropbox"
@@ -50,7 +56,7 @@ class Home extends React.Component {
         {
           this.state.sites
           .map((site, index )=> (
-            <Link to={`/results/${site.attributes.OBJECTID}`}>
+            <Link key={site.attributes.OBJECTID} to={`/results/${site.attributes.OBJECTID}`}>
               <div className="outer-wrapper">
                 <div className="inner-wrapper" key={index}>
                   <h3>Status: {site.attributes.CLASSIFCTN}</h3>
