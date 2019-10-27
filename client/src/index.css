@@ -1,28 +1,63 @@
+/* ---------------------------GLOBALS CSS------------------ */
+
+/* color palet:
+  #BBE2F2 is light blue
+  #062601 is black
+  #0F4001 is darkest green
+  #4F7302 is midle green
+  #B0C90B
+   */
 body {
   margin: 0;
-  padding: 0;
 }
 
 li {
   list-style: none;
 }
 
-.header {
-  position: left;
-  left: 0;
-  /* bottom: 0; */
-  width: 100%;
-  background-color: darkslategray;
+nav a {
+  text-decoration: none;
   color: white;
-  text-align: left;
 }
 
-.footer {
+a {
+  text-decoration: none;
+}
+
+ul li {
+  padding: 1rem 0.5rem;
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+}
+
+
+/* ---------------------------HEADER CSS------------------ */
+#header, #the-footer{
+  width: 100vw;
+  background-color: darkblue;
+  color: white;
+  text-align: left;
+  height: 4rem;
+}
+
+nav {
+  color: white;
+}
+
+nav a.active {
+  color: cornflowerblue;
+}
+
+/* ---------------------------FOOTER CSS------------------ */
+
+#the-footer {
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
-  background-color: darkslategray;
-  color: white;
-  text-align: center;
+  text-align: right;
 }
+
