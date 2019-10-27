@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Autocomplete from 'react-google-autocomplete';
 import axios from 'axios';
 
@@ -7,13 +7,16 @@ class Home extends React.Component {
   state = {
     sites: [],
     totalResults: 0,
-    radiusMiles: 1
+    radiusMiles: 1,
+    place: null,
   }
-  handleSearch = place => {
+  
+  fetchSites = () => {
+    const { place, radiusMiles } = this.state;
+    if (!place || !place.geometry) return;
     const [lat, lng] = [place.geometry.location.lat(), place.geometry.location.lng()];
     //these values will be grabbed from the user later
     //default for testing
-    const radiusMiles = this.state.radiusMiles
     const radiusDegrees = (radiusMiles/138)
     const minLongitude = lng - radiusDegrees
     const maxLongitude = lng + radiusDegrees
@@ -23,12 +26,19 @@ class Home extends React.Component {
     axios.get(url)
     .then(response => {
       const { data } = response;
-      this.setState({sites: data.features, totalResults: data.features.length})
+      const { features } = data;
+      this.setState({ sites: features, totalResults: features.length })
     })
   }
 
-  handleRadiusChange = event => {
-    this.setState({ radiusMiles: Number(event.target.value) })
+  handleSearch = place => this.setState({ place }, this.fetchSites)
+
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
+
+  handleSiteClick = site => {
+    const { handleSiteSelection, history } = this.props;
+    handleSiteSelection(site)
+    history.push(`/results/${site.attributes.OBJECTID}`)
   }
 
   render(){
@@ -46,33 +56,38 @@ class Home extends React.Component {
           <select 
           className="radius-dropbox"
           value={this.state.radiusMiles}
-          onChange={this.handleRadiusChange}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          onChange={this.handleRadiusChange}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
           </select>
         </div>
           <h1 className="totalResults">Total Results: {this.state.totalResults}</h1>
         {
           this.state.sites
           .map((site, index )=> (
-            <Link key={site.attributes.OBJECTID} to={`/results/${site.attributes.OBJECTID}`}>
+            <div key={site.attributes.OBJECTID} onClick={() => this.handleSiteClick(site)}>
               <div className="outer-wrapper">
                 <div className="inner-wrapper" key={index}>
-                  <h3>Status: {site.attributes.CLASSIFCTN}</h3>
-                  <h3>Phase: {site.attributes.PHASE}</h3>
-                  <h3>Lat: {site.attributes.LAT}</h3>
-                  <h3>Lon: {site.attributes.LON}</h3>
-                  <h3>Cleanup: {site.attributes.TASK_NAME}</h3>
-                  <h3>Address: {site.attributes.HNUM} {site.attributes.PRE_DIR} {site.attributes.ST_NAME} {site.attributes.ST_TYPE}</h3>
-                  <div className="line"></div> 
+                  <div className="image-wrapper" key={index}>
+                    <img src={`https://maps.googleapis.com/maps/api/streetview?size=150x150&location=${site.attributes.HNUM}+${site.attributes.ST_NAME}+${site.attributes.PRE_DIR}+${site.attributes.ST_TYPE}+MIAMI+FL&heading=271&pitch=-0.76&key=AIzaSyDLun1DYQxp9IawieGnpd-4d0Jrp8sZSHU`} alt="contaminated site" />
+                  </div>  
+                  <div className="text-wrapper">
+                    <h3>Status: {site.attributes.CLASSIFCTN}</h3>
+                    <h3>Phase: {site.attributes.PHASE}</h3>
+                    <h3>Lat: {site.attributes.LAT}</h3>
+                    <h3>Lon: {site.attributes.LON}</h3>
+                    <h3>Cleanup: {site.attributes.TASK_NAME}</h3>
+                    <h3>Address: {site.attributes.HNUM} {site.attributes.PRE_DIR} {site.attributes.ST_NAME} {site.attributes.ST_TYPE}</h3>
+                  </div>
                 </div> 
               </div>
-            </Link>  
+            </div>  
           ))
         }
       </>
     )
   }
 }
-export default Home
+export default withRouter(Home)
