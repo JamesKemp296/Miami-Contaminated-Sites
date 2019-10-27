@@ -1,6 +1,5 @@
-body{
-  background-color: #BBE2FE;
-}
+/* ---------------------------HOME CSS------------------ */
+
 .background-wrapper {
   background-image: url('./assets/images/background.jpg');
   background-size: cover;
@@ -22,6 +21,11 @@ body{
 .search-bar:focus{
   outline-width: 0;
 }
+.totalResults {
+  text-align: center;
+}
+/* ---------------------------RESULTS CSS------------------ */
+
 .outer-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -31,8 +35,11 @@ body{
 }
 .inner-wrapper {
   background-color: white;
+  color: black;
   width: 70vh;
   padding: 0.5rem;
   box-shadow: 5px 10px 20px black;
   box-shadow: 5px 10px 20px black;
 }
+
+/* ----------------------SINGLE RESULT CSS------------------ */
