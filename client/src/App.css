@@ -34,6 +34,8 @@
   padding-top: 20px;
 }
 .inner-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: white;
   color: black;
   width: 70vh;

@@ -1,4 +1,4 @@
-mport Autocomplete from 'react-google-autocomplete';
+import Autocomplete from 'react-google-autocomplete';
 component Map extends Component {
  /**
   * When the user types an address in the search box

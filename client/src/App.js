@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css'
 import './index.css'
@@ -9,19 +9,26 @@ import About from './pages/About'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
+class App extends Component {
+  state = { site: {} }
 
+  handleSiteSelection = site => this.setState({ site })
 
-const App = () => (
-  <BrowserRouter>
-    <Navbar/>
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/results" component={ResultList} />
-      <Route path="/results/:id" component={SingleResult} />
-      <Route path="/about" component={About} />
-    </Switch>
-    <Footer />
-  </BrowserRouter>
-)
+  render() {
+    const { site } = this.state;
+    return (
+      <BrowserRouter>
+      <Navbar/>
+      <Switch>
+        <Route exact path="/" render={() => <Home handleSiteSelection={this.handleSiteSelection} />} />
+        <Route exact path="/results" component={ResultList} />
+        <Route path="/results/:id" render={() => <SingleResult site={site} />} />
+        <Route path="/about" component={About} />
+      </Switch>
+      <Footer />
+    </BrowserRouter>
+    )
+  }
+}
 
 export default App
