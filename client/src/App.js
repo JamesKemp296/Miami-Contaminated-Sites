@@ -8,20 +8,72 @@ import About from './pages/About'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SearchResults from './pages/SearchResults'
+import axios from 'axios'
 
 class App extends Component {
-  state = { site: {} }
+  state = {
+            site: {},
+            radiusMiles: 1,
+            place: null,
+            sites: [],
+            totalResults: 0,
+          }
 
   handleSiteSelection = site => this.setState({ site })
 
+  handleSearch = place => this.setState({ place })
+
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
+
+  fetchSites = () => {
+    const { place, radiusMiles } = this.state;
+    if (!place || !place.geometry) return;
+    const [lat, lng] = [place.geometry.location.lat(), place.geometry.location.lng()];
+    //these values will be grabbed from the user later
+    //default for testing
+    const radiusDegrees = (radiusMiles/138)
+    const minLongitude = lng - radiusDegrees
+    const maxLongitude = lng + radiusDegrees
+    const minLatitude = lat - radiusDegrees
+    const maxLatitude = lat + radiusDegrees
+    const url = `/api/sites/${minLongitude}/${minLatitude}/${maxLongitude}/${maxLatitude}`
+    axios.get(url)
+    .then(response => {
+      const { data } = response;
+      const { features } = data;
+      this.setState({ sites: features, totalResults: features.length })
+    })
+  }
+
   render() {
-    const { site } = this.state;
+    const { site, place, radiusMiles, sites, totalResults } = this.state;
     return (
       <BrowserRouter>
       <Navbar/>
       <Switch>   
-        <Route exact path="/" component={Home} />
-        <Route exact path="/search" render={() => <SearchResults handleSiteSelection={this.handleSiteSelection} />} />
+        <Route exact path="/" render={
+          () => (
+            <Home
+              radiusMiles={radiusMiles}
+              handleRadiusChange={this.handleRadiusChange}
+              place={place}
+              handleSearch={this.handleSearch}
+            />
+          )}
+        />
+        <Route exact path="/search" render={
+          () => (
+            <SearchResults
+              handleSiteSelection={this.handleSiteSelection}
+              radiusMiles={radiusMiles}
+              handleRadiusChange={this.handleRadiusChange}
+              place={place}
+              sites={sites}
+              totalResults={totalResults}
+              fetchSites={this.fetchSites}
+            />
+          )}
+        />
         <Route path="/search/:id" render={() => <SingleResult site={site} />} />
         <Route path="/about" component={About} />
       </Switch>
