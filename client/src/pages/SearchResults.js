@@ -1,40 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Autocomplete from 'react-google-autocomplete';
 import axios from 'axios';
 
 class SearchResults extends React.Component {
-  state = {
-    sites: [],
-    totalResults: 0,
-    radiusMiles: 1,
-    place: null,
-  }
-  
-  fetchSites = () => {
-    const { place, radiusMiles } = this.state;
-    if (!place || !place.geometry) return;
-    const [lat, lng] = [place.geometry.location.lat(), place.geometry.location.lng()];
-    //these values will be grabbed from the user later
-    //default for testing
-    const radiusDegrees = (radiusMiles/138)
-    const minLongitude = lng - radiusDegrees
-    const maxLongitude = lng + radiusDegrees
-    const minLatitude = lat - radiusDegrees
-    const maxLatitude = lat + radiusDegrees
-    const url = `/api/sites/${minLongitude}/${minLatitude}/${maxLongitude}/${maxLatitude}`
-    axios.get(url)
-    .then(response => {
-      const { data } = response;
-      const { features } = data;
-      this.setState({ sites: features, totalResults: features.length })
-    })
-  }
-
-  handleSearch = place => this.setState({ place }, this.fetchSites)
-
-  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
-
   handleSiteClick = site => {
     const { handleSiteSelection, history } = this.props;
     handleSiteSelection(site)
@@ -44,28 +12,21 @@ class SearchResults extends React.Component {
   render(){
     return(
       <>
- 			<div style={{ margin: '100px' }}>
-			</div>
         <div className="background-wrapper">
-          <Autocomplete
-            style={{width: '90%'}}
-            onPlaceSelected={this.handleSearch}
-            types={['address']}
-            componentRestrictions={{ country: 'us' }}
-          />
-          <select 
-          className="radius-dropbox"
-          value={this.state.radiusMiles}
-          onChange={this.handleRadiusChange}
+          <h1>{this.props.place.formatted_address}</h1>
+          <select
+            className="radius-dropbox"
+            value={this.props.radiusMiles}
+            onChange={this.props.handleRadiusChange}
           >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
         </div>
-          <h1 className="totalResults">Total Results: {this.state.totalResults}</h1>
+          <h1 className="totalResults">Total Results: {this.props.totalResults}</h1>
         {
-          this.state.sites
+          this.props.sites
           .map((site, index )=> (
             <div key={site.attributes.OBJECTID} onClick={() => this.handleSiteClick(site)}>
               <div className="outer-wrapper">
@@ -88,6 +49,9 @@ class SearchResults extends React.Component {
         }
       </>
     )
+  }
+  componentDidMount(){
+    this.props.fetchSites()
   }
 }
 export default withRouter(SearchResults)
