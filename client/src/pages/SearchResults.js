@@ -46,8 +46,6 @@ class SearchResults extends React.Component {
     return(
       <>
         <div className="results-filters">
-          <h1>{this.state.place.formatted_address}</h1>
-          <h1 className="totalResults">Showing {this.state.sites.length} of {this.state.totalResults} results for {this.state.permitText}</h1>
           <label htmlFor="radius-dropbox">Radius:</label>
           <select
             id="radius-dropbox"
@@ -74,7 +72,6 @@ class SearchResults extends React.Component {
             <option value="ARP">Airports and Contracts</option>
           </select>
         </div>
-        <h1 className="totalResults">Showing {this.state.sites.length} of {this.state.totalResults} results for {this.state.permitText}</h1>
           <Result {...this.state}/>
         <div id="map"></div>
       </>
