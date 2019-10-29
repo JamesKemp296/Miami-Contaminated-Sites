@@ -17,14 +17,15 @@ class App extends Component {
             place: null,
             sites: [],
             totalResults: 0,
-            permit: 'all'
+            permit: 'all',
+            permitText: 'All'
           }
 
   handleSiteSelection = site => this.setState({ site })
 
   handleSearch = place => this.setState({ place })
 
-  handlePermitChange = event => this.setState({ permit: event.target.value })
+  handlePermitChange = event => this.setState({ permit: event.target.value, permitText: event.target.options[event.target.selectedIndex].text })
 
   handleRadiusChange = event => this.setState({ permit: Number(event.target.value) }, this.fetchSites)
 
@@ -49,7 +50,7 @@ class App extends Component {
   }
 
   render() {
-    const { site, place, radiusMiles, sites, totalResults, permit } = this.state;
+    const { site, place, radiusMiles, sites, totalResults, permit, permitText } = this.state;
     return (
       <BrowserRouter>
       <Navbar/>
@@ -74,6 +75,7 @@ class App extends Component {
               place={place}
               sites={sites}
               permit={permit}
+              permitText={permitText}
               totalResults={totalResults}
               fetchSites={this.fetchSites}
             />

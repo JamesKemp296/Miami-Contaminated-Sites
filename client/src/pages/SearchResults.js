@@ -39,7 +39,7 @@ class SearchResults extends React.Component {
             <option value="ARP">Airports and Contracts</option>
           </select>
         </div>
-          <h1 className="totalResults">Total Results: {this.props.totalResults}</h1>
+          <h1 className="totalResults">Total Results: {this.props.totalResults} for {this.props.permitText}</h1>
         {
           this.props.sites
           .filter(site => {
