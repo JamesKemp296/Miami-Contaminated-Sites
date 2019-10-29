@@ -3,7 +3,7 @@
 
 .about {
   font-family: 'Raleway', Arial, sans-serif;
-  background-color: white;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,10 +12,12 @@
   margin-bottom: 100px;
 
 }
+
 .about-title {
   font-family: 'Raleway', Arial, sans-serif;
+  background-color: transparent;
   text-align: center;
-  background-color: white;
+  color: whitesmoke;
 }
 figure.snip1104 {
   font-family: 'Raleway', Arial, sans-serif;
@@ -139,7 +141,6 @@ figure.snip1104.hover:before {
 }
 
 
-/* Demo purposes only */
 html {
   height: 100%;
 }
