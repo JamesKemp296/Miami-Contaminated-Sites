@@ -28,9 +28,9 @@ class App extends Component {
   handlePermitChange = event => this.setState({
      permit: event.target.value, 
      permitText: event.target.options[event.target.selectedIndex].text
-    })
+  })
 
-  handleRadiusChange = event => this.setState({ permit: Number(event.target.value) }, this.fetchSites)
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
 
   fetchSites = () => {
     const { place, radiusMiles } = this.state;
