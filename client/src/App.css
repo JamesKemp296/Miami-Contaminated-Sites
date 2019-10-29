@@ -1,7 +1,7 @@
 /* ---------------------------HOME CSS------------------ */
 
 .background-wrapper {
-  background-image: url('./assets/images/background.jpg');
+  background-image: url('/images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
