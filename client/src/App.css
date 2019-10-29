@@ -20,32 +20,5 @@
 }
 /* ---------------------------RESULTS CSS------------------ */
 
-.outer-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  place-items: center;
-  grid-gap: 10px;
-  padding-top: 20px;
-}
-.inner-wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background-color: white;
-  color: black;
-  width: 70vh;
-  padding: 0.5rem;
-  box-shadow: 5px 10px 20px black;
-  box-shadow: 5px 10px 20px black;
-}
-
-.results-filters {
-  display: grid;
-  place-items: center;
-  color: white;
-}
-
-.totalResults {
-  color: white;
-}
 
 /* ----------------------SINGLE RESULT CSS------------------ */

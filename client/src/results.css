@@ -1,0 +1,37 @@
+.outer-wrapper {
+  display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 40px;
+  padding-left: 20vw;
+	padding-right: 20vw;
+	place-items: center;
+}
+.inner-wrapper {
+  background-color: white;
+  color: black;
+  box-shadow: 5px 10px 20px black;
+	box-shadow: 5px 10px 20px black;
+	max-width: 400px;
+}
+
+.results-filters {
+  display: grid;
+  place-items: center;
+  color: white;
+}
+
+.totalResults {
+  color: white;
+}
+
+.google-image{
+  width: 100%;
+}
+
+.text-wrapper {
+  padding: 20px;
+}
+
+
+
+
