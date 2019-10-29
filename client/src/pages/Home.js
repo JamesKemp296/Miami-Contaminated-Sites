@@ -16,18 +16,6 @@ const Home = props => {
 				types={['address']}
 				componentRestrictions={{ country: 'us' }}
 			/>
-			<select
-				className="radius-dropbox"
-				value={props.radiusMiles}
-				onChange={props.handleRadiusChange}
-			>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</select>
-			<button disabled={!props.place}>
-				SEARCH!
-			</button>
 		</form>
 	)
 }

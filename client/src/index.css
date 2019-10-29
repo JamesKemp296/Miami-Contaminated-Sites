@@ -9,6 +9,11 @@
    */
 body {
   margin: 0;
+  background-image: url('./assets/images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 li {
@@ -38,7 +43,7 @@ ul {
 /* ---------------------------HEADER CSS------------------ */
 #header, #the-footer{
   width: 100vw;
-  background-color: darkblue;
+  background-color: transparent;
   color: white;
   text-align: left;
   height: 4rem;

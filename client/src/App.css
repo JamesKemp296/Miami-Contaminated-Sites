@@ -1,11 +1,5 @@
 /* ---------------------------HOME CSS------------------ */
-
 .background-wrapper {
-  background-image: url('./assets/images/background.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
   height: 40vh;
   display: grid;
   place-items: center;
@@ -42,6 +36,16 @@
   padding: 0.5rem;
   box-shadow: 5px 10px 20px black;
   box-shadow: 5px 10px 20px black;
+}
+
+.results-filters {
+  display: grid;
+  place-items: center;
+  color: white;
+}
+
+.totalResults {
+  color: white;
 }
 
 /* ----------------------SINGLE RESULT CSS------------------ */
