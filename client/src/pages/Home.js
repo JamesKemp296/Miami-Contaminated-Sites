@@ -11,7 +11,7 @@ const Home = props => {
 	return(
 		<form className="background-wrapper" onSubmit={handleSubmit}>
 			<Autocomplete
-				style={{width: '40%'}}
+				style={{width: '90%'}}
 				onPlaceSelected={props.handleSearch}
 				types={['address']}
 				componentRestrictions={{ country: 'us' }}

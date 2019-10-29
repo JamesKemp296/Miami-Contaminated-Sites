@@ -5,7 +5,7 @@ class SearchResults extends React.Component {
   handleSiteClick = site => {
     const { handleSiteSelection, history } = this.props;
     handleSiteSelection(site)
-    history.push(`/results/${site.attributes.OBJECTID}`)
+    history.push(`/search/${site.attributes.OBJECTID}`)
   }
 
   render(){
