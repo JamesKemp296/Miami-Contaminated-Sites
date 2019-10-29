@@ -2,11 +2,8 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 class SingleResult extends React.Component {
-
   state = { site: { }, loading: true }
-
   fetchSite = () => {
-    //console.table(this.props.match.params.id)
     const siteId = this.props.match.params.id;
     const siteUrl =`https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/ContaminatedSite_gdb/FeatureServer/0/query?where=OBJECTID%20%3E%3D%20${siteId}%20AND%20OBJECTID%20%3C%3D%20${siteId}&outFields=*&outSR=4326&f=json`
     fetch(siteUrl)
@@ -16,9 +13,7 @@ class SingleResult extends React.Component {
   }
   componentDidMount(){
     this.fetchSite()
-    
   }
-
   render(){
     const {site} = this.state
     const permitLookup = {
@@ -31,7 +26,6 @@ class SingleResult extends React.Component {
       "ARP"	: "Airports and Contracts"
     }
     const permit = permitLookup[site.PERMITTYPE] || "Uknown";
-
     return(
   <div className="single-list">
    <div className="single-image">
