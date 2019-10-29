@@ -17,7 +17,7 @@ class SearchResults extends React.Component {
     permitText: event.target.options[event.target.selectedIndex].text
   })
 
-  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, (place) => this.fetchSites(this.state.place))
 
   fetchSites = (place) => {
     const { radiusMiles } = this.state;
@@ -48,8 +48,8 @@ class SearchResults extends React.Component {
           <label htmlFor="radius-dropbox">Radius:</label>
           <select
             id="radius-dropbox"
-            value={this.props.radiusMiles}
-            onChange={this.props.handleRadiusChange}
+            value={this.state.radiusMiles}
+            onChange={this.handleRadiusChange}
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -58,8 +58,8 @@ class SearchResults extends React.Component {
           <label htmlFor="permit">Type of contamination:</label>
           <select
             id="permit"
-            value={this.props.permit}
-            onChange={this.props.handlePermitChange}
+            value={this.state.permit}
+            onChange={this.handlePermitChange}
           >
             <option value="all">All</option>
             <option value="UT">Storage Tanks</option>
