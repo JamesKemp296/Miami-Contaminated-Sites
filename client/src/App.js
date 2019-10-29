@@ -11,19 +11,14 @@ import Footer from './components/Footer'
 import SearchResults from './pages/SearchResults'
 
 class App extends Component {
-  state = { site: {} }
-
-  handleSiteSelection = site => this.setState({ site })
-
   render() {
-    const { site } = this.state;
     return (
       <BrowserRouter>
       <Navbar/>
       <Switch>   
-        <Route exact path="/" component={Home} />
-        <Route exact path="/search" render={() => <SearchResults handleSiteSelection={this.handleSiteSelection} />} />
-        <Route path="/search/:id" render={() => <SingleResult site={site} />} />
+        <Route exact path="/" component={Home}/>
+        <Route path="/places/:placeId" component={SearchResults}/>
+        <Route path="/sites/:id" component={SingleResult} />
         <Route path="/about" component={About} />
       </Switch>
       <Footer />

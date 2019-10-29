@@ -5,7 +5,7 @@ const Navbar = () => (
   <nav id="header">
     <ul className="nav-links">
       <li><NavLink exact to="/">Home</NavLink></li>
-      <li><NavLink exact to="/search">search</NavLink></li>
+      <li><NavLink exact to='/places/placeId'>results</NavLink></li>
     </ul>
   </nav>
 )

@@ -1,18 +1,27 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import Autocomplete from 'react-google-autocomplete';
-import axios from 'axios';
+import axios from 'axios'
+import Result from '../components/Result'
 
 class SearchResults extends React.Component {
   state = {
-    sites: [],
-    totalResults: 0,
-    radiusMiles: 1,
-    place: null,
-  }
-  
-  fetchSites = () => {
-    const { place, radiusMiles } = this.state;
+            place: { formatted_address: "Loading..." },
+            radiusMiles: 1,
+            sites: [],
+            totalResults: 0,
+            permit: 'all',
+            permitText: 'All',
+            filteredResults: 0
+          }
+
+  handlePermitChange = event => this.setState({
+    permit: event.target.value,
+    permitText: event.target.options[event.target.selectedIndex].text
+  })
+
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, () => this.fetchSites(this.state.place))
+
+  fetchSites = (place) => {
+    const { radiusMiles } = this.state;
     if (!place || !place.geometry) return;
     const [lat, lng] = [place.geometry.location.lat(), place.geometry.location.lng()];
     //these values will be grabbed from the user later
@@ -27,67 +36,55 @@ class SearchResults extends React.Component {
     .then(response => {
       const { data } = response;
       const { features } = data;
-      this.setState({ sites: features, totalResults: features.length })
+      this.setState({ sites: features, totalResults: features.length, place })
     })
   }
 
-  handleSearch = place => this.setState({ place }, this.fetchSites)
-
-  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
-
-  handleSiteClick = site => {
-    const { handleSiteSelection, history } = this.props;
-    handleSiteSelection(site)
-    history.push(`/results/${site.attributes.OBJECTID}`)
-  }
+  
 
   render(){
     return(
       <>
- 			<div style={{ margin: '100px' }}>
-			</div>
-        <div className="background-wrapper">
-          <Autocomplete
-            style={{width: '90%'}}
-            onPlaceSelected={this.handleSearch}
-            types={['address']}
-            componentRestrictions={{ country: 'us' }}
-          />
-          <select 
-          className="radius-dropbox"
-          value={this.state.radiusMiles}
-          onChange={this.handleRadiusChange}
+        <div className="results-filters">
+          <h1>{this.state.place.formatted_address}</h1>
+          <h1 className="totalResults">Showing {this.state.sites.length} of {this.state.totalResults} results for {this.state.permitText}</h1>
+          <label htmlFor="radius-dropbox">Radius:</label>
+          <select
+            id="radius-dropbox"
+            value={this.state.radiusMiles}
+            onChange={this.handleRadiusChange}
           >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
+          <label htmlFor="permit">Type of contamination:</label>
+          <select
+            id="permit"
+            value={this.state.permit}
+            onChange={this.handlePermitChange}
+          >
+            <option value="all">All</option>
+            <option value="UT">Storage Tanks</option>
+            <option value="IW5">Industrial Waste</option>
+            <option value="HWR">Hazardous Waste Removal</option>
+            <option value="SW">Solid Waste</option>
+            <option value="IW">Industrial Waste</option>
+            <option value="AW">Waste</option>
+            <option value="ARP">Airports and Contracts</option>
+          </select>
         </div>
-          <h1 className="totalResults">Total Results: {this.state.totalResults}</h1>
-        {
-          this.state.sites
-          .map((site, index )=> (
-            <div key={site.attributes.OBJECTID} onClick={() => this.handleSiteClick(site)}>
-              <div className="outer-wrapper">
-                <div className="inner-wrapper" key={index}>
-                  <div className="image-wrapper" key={index}>
-                    <img src={`https://maps.googleapis.com/maps/api/streetview?size=150x150&location=${site.attributes.HNUM}+${site.attributes.ST_NAME}+${site.attributes.PRE_DIR}+${site.attributes.ST_TYPE}+MIAMI+FL&heading=271&pitch=-0.76&key=AIzaSyDLun1DYQxp9IawieGnpd-4d0Jrp8sZSHU`} alt="contaminated site" />
-                  </div>  
-                  <div className="text-wrapper">
-                    <h3>Status: {site.attributes.CLASSIFCTN}</h3>
-                    <h3>Phase: {site.attributes.PHASE}</h3>
-                    <h3>Lat: {site.attributes.LAT}</h3>
-                    <h3>Lon: {site.attributes.LON}</h3>
-                    <h3>Cleanup: {site.attributes.TASK_NAME}</h3>
-                    <h3>Address: {site.attributes.HNUM} {site.attributes.PRE_DIR} {site.attributes.ST_NAME} {site.attributes.ST_TYPE}</h3>
-                  </div>
-                </div> 
-              </div>
-            </div>  
-          ))
-        }
+        <h1 className="totalResults">Showing {this.state.sites.length} of {this.state.totalResults} results for {this.state.permitText}</h1>
+          <Result {...this.state}/>
+        <div id="map"></div>
       </>
     )
   }
+  componentDidMount(){
+    const service = new window.google.maps.places.PlacesService(document.getElementById('map'))
+    service.getDetails({ placeId: this.props.match.params.placeId }, (place) => this.fetchSites(place))
+
+
+  }
 }
-export default withRouter(SearchResults)
+export default SearchResults

@@ -1,15 +1,18 @@
 import React from 'react'
+import Autocomplete from 'react-google-autocomplete';
 
-class Home extends React.Component {
-	render(){
-		return(
-			<div className="result-list">
-					<h1>This is the Home Page</h1>
-					<h2>Please work</h2>
-			</div>
-		)
-	}
+const Home = props => {
+	const goToSearchResultsForPlace = place => props.history.push(`/places/${place.place_id}`)
+
+	return(
+		<div className="background-wrapper">
+			<Autocomplete
+				style={{width: '90%'}}
+				onPlaceSelected={goToSearchResultsForPlace}
+				types={['address']}
+				componentRestrictions={{ country: 'us' }}
+			/>
+		</div>
+	)
 }
-  
-
 export default Home
