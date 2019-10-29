@@ -1,18 +1,50 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 class SearchResults extends React.Component {
-  handleSiteClick = site => {
-    const { handleSiteSelection, history } = this.props;
-    handleSiteSelection(site)
-    history.push(`/search/${site.attributes.OBJECTID}`)
+  state = {
+            place: { formatted_address: "Loading..." },
+            radiusMiles: 1,
+            sites: [],
+            totalResults: 0,
+            permit: 'all',
+            permitText: 'All'
+          }
+
+  handlePermitChange = event => this.setState({
+    permit: event.target.value,
+    permitText: event.target.options[event.target.selectedIndex].text
+  })
+
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, this.fetchSites)
+
+  fetchSites = (place) => {
+    const { radiusMiles } = this.state;
+    if (!place || !place.geometry) return;
+    const [lat, lng] = [place.geometry.location.lat(), place.geometry.location.lng()];
+    //these values will be grabbed from the user later
+    //default for testing
+    const radiusDegrees = (radiusMiles/138)
+    const minLongitude = lng - radiusDegrees
+    const maxLongitude = lng + radiusDegrees
+    const minLatitude = lat - radiusDegrees
+    const maxLatitude = lat + radiusDegrees
+    const url = `/api/sites/${minLongitude}/${minLatitude}/${maxLongitude}/${maxLatitude}`
+    axios.get(url)
+    .then(response => {
+      const { data } = response;
+      const { features } = data;
+      this.setState({ sites: features, totalResults: features.length, place })
+    })
   }
 
   render(){
     return(
       <>
         <div className="results-filters">
-          <h1>{this.props.place.formatted_address}</h1>
+
+          <h1>{this.state.place.formatted_address}</h1>
           <label htmlFor="radius-dropbox">Radius:</label>
           <select
             id="radius-dropbox"
@@ -39,20 +71,20 @@ class SearchResults extends React.Component {
             <option value="ARP">Airports and Contracts</option>
           </select>
         </div>
-          <h1 className="totalResults">Showing {this.props.sites.length} of {this.props.totalResults} results for {this.props.permitText}</h1>
+          <h1 className="totalResults">Showing {this.state.sites.length} of {this.state.totalResults} results for {this.state.permitText}</h1>
         {
-          this.props.sites
+          this.state.sites
           .filter(site => {
-            if (this.props.permit === 'all') return true 
-            else return site.attributes.PERMITTYPE === this.props.permit
+            if (this.state.permit === 'all') return true
+            else return site.attributes.PERMITTYPE === this.state.permit
           })
           .map((site, index )=> (
-            <div key={site.attributes.OBJECTID} onClick={() => this.handleSiteClick(site)}>
+            <Link key={site.attributes.OBJECTID} to={`/sites/${site.attributes.OBJECTID}`}>
               <div className="outer-wrapper">
                 <div className="inner-wrapper" key={index}>
                   <div className="image-wrapper" key={index}>
                     <img src={`https://maps.googleapis.com/maps/api/streetview?size=150x150&location=${site.attributes.HNUM}+${site.attributes.ST_NAME}+${site.attributes.PRE_DIR}+${site.attributes.ST_TYPE}+MIAMI+FL&heading=271&pitch=-0.76&key=AIzaSyDLun1DYQxp9IawieGnpd-4d0Jrp8sZSHU`} alt="contaminated site" />
-                  </div>  
+                  </div>
                   <div className="text-wrapper">
                     <h3>Status: {site.attributes.CLASSIFCTN}</h3>
                     <h3>Type: {site.attributes.PERMITTYPE}</h3>
@@ -62,16 +94,20 @@ class SearchResults extends React.Component {
                     <h3>Cleanup: {site.attributes.TASK_NAME}</h3>
                     <h3>Address: {site.attributes.HNUM} {site.attributes.PRE_DIR} {site.attributes.ST_NAME} {site.attributes.ST_TYPE}</h3>
                   </div>
-                </div> 
+                </div>
               </div>
-            </div>  
+            </Link>
           ))
         }
+        <div id="map"></div>
       </>
     )
   }
   componentDidMount(){
-    this.props.fetchSites()
+    const service = new window.google.maps.places.PlacesService(document.getElementById('map'))
+    service.getDetails({ placeId: this.props.match.params.placeId }, (place) => this.fetchSites(place))
+
+
   }
 }
-export default withRouter(SearchResults)
+export default SearchResults
