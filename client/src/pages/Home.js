@@ -1,22 +1,18 @@
 import React from 'react'
 import Autocomplete from 'react-google-autocomplete';
-import { withRouter } from 'react-router-dom'
 
 const Home = props => {
-	const handleSubmit = event => {
-		event.preventDefault()
-		if (props.place) props.history.push("/search")
-	}
-	console.log(props)
+	const goToSearchResultsForPlace = place => props.history.push(`/places/${place.place_id}`)
+
 	return(
-		<form className="background-wrapper" onSubmit={handleSubmit}>
+		<div className="background-wrapper">
 			<Autocomplete
 				style={{width: '90%'}}
-				onPlaceSelected={props.handleSearch}
+				onPlaceSelected={goToSearchResultsForPlace}
 				types={['address']}
 				componentRestrictions={{ country: 'us' }}
 			/>
-		</form>
+		</div>
 	)
 }
-export default withRouter(Home)
+export default Home
