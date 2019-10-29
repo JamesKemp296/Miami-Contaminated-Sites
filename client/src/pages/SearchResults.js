@@ -13,8 +13,9 @@ class SearchResults extends React.Component {
       <>
         <div className="results-filters">
           <h1>{this.props.place.formatted_address}</h1>
+          <label htmlFor="radius-dropbox">Radius:</label>
           <select
-            className="radius-dropbox"
+            id="radius-dropbox"
             value={this.props.radiusMiles}
             onChange={this.props.handleRadiusChange}
           >
@@ -22,19 +23,20 @@ class SearchResults extends React.Component {
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
+          <label htmlFor="permit">Type of contamination:</label>
           <select
             id="permit"
             value={this.props.permit}
             onChange={this.props.handlePermitChange}
           >
             <option value="all">All</option>
-            <option value="UT">UT</option>
-            <option value="IW5">IW5</option>
-            <option value="HWR">HWR</option>
-            <option value="SW">SW</option>
-            <option value="IW">IW</option>
-            <option value="AW">AW</option>
-            <option value="ARP">ARP</option>
+            <option value="UT">Storage Tanks</option>
+            <option value="IW5">Industrial Waste</option>
+            <option value="HWR">Hazardous Waste Removal</option>
+            <option value="SW">Solid Waste</option>
+            <option value="IW">Industrial Waste</option>
+            <option value="AW">Waste</option>
+            <option value="ARP">Airports and Contracts</option>
           </select>
         </div>
           <h1 className="totalResults">Total Results: {this.props.totalResults}</h1>
