@@ -11,23 +11,11 @@ const Home = props => {
 	return(
 		<form className="background-wrapper" onSubmit={handleSubmit}>
 			<Autocomplete
-				style={{width: '90%'}}
+				style={{width: '40%'}}
 				onPlaceSelected={props.handleSearch}
 				types={['address']}
 				componentRestrictions={{ country: 'us' }}
 			/>
-			<select
-				className="radius-dropbox"
-				value={props.radiusMiles}
-				onChange={props.handleRadiusChange}
-			>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</select>
-			<button disabled={!props.place}>
-				SEARCH!
-			</button>
 		</form>
 	)
 }
