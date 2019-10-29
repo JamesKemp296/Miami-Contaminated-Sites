@@ -17,7 +17,7 @@ class SearchResults extends React.Component {
     permitText: event.target.options[event.target.selectedIndex].text
   })
 
-  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, (place) => this.fetchSites(this.state.place))
+  handleRadiusChange = event => this.setState({ radiusMiles: Number(event.target.value) }, () => this.fetchSites(this.state.place))
 
   fetchSites = (place) => {
     const { radiusMiles } = this.state;
