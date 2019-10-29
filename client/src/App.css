@@ -42,6 +42,11 @@
 .results-filters {
   display: grid;
   place-items: center;
+  color: white;
+}
+
+.totalResults {
+  color: white;
 }
 
 /* ----------------------SINGLE RESULT CSS------------------ */
