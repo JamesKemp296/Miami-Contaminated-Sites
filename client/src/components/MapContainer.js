@@ -21,11 +21,12 @@ export class MapContainer extends React.Component {
                     height: '400px'
           
                   }}
-            initialCenter={{
-                lat: this.props.place.geometry.location.lat,
-                lng: this.props.place.geometry.location.lng
+            // initialCenter={{
+            //     lat: this.props.place.geometry.location.lat,
+            //     lng: this.props.place.geometry.location.lng
     
-            }}
+            // }}
+            // this.props.place.geometry.location.lng
             zoom={12}
             onClick={this.onMapClicked}
         >
