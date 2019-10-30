@@ -10,7 +10,9 @@ class SearchResults extends React.Component {
             totalResults: 0,
             permit: 'all',
             permitText: 'All',
-            filteredResults: 0
+            filteredResults: 0,
+            mapPoints: []
+            
           }
 
   handlePermitChange = event => this.setState({
@@ -36,7 +38,13 @@ class SearchResults extends React.Component {
     .then(response => {
       const { data } = response;
       const { features } = data;
-      this.setState({ sites: features, totalResults: features.length, place })
+      const mapPoints = data.features.map(site => {
+        return {
+          lat: site.attributes.LAT,
+          lon: site.attributes.LON,
+        }
+      })
+      this.setState({ sites: features, totalResults: features.length, place, mapPoints })
     })
   }
 
@@ -45,7 +53,10 @@ class SearchResults extends React.Component {
   render(){
     return(
       <>
-        <MapContainer />
+        <MapContainer 
+          mapPoints={this.state.mapPoints}
+          place={this.state.place}
+        />
         <div className="results-filters">
           <label htmlFor="radius-dropbox">Radius:</label>
           <select

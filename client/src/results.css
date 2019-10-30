@@ -17,11 +17,12 @@
 .results-filters {
   display: grid;
   place-items: center;
-  color: white;
+  color: black;
+  padding-top: 400px;
 }
 
 .totalResults {
-  color: white;
+  color: black;
 }
 
 .google-image{
