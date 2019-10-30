@@ -26,12 +26,22 @@ const Home = props => {
           </p>
         </div>
         <Autocomplete className="autocomplete"
-        style={{width: '35%'}}
+        style={{
+            width: '40%', 
+            height: '50px',
+            borderTopWidth: 0,
+            borderBottomWidth:0,
+            paddingLeft: '15px',
+            outline: 'none',
+            borderRadius: 50,
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}
         onPlaceSelected={goToSearchResultsForPlace}
         types={['address']}
         componentRestrictions={{ country: 'us' }}
         />
-      </div>
+      </div>      
     </div>
    </header>
 

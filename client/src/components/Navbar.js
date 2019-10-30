@@ -3,6 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom'
 
 const Navbar = props => {
   return(
+
     <nav id="header">
       <ul className="nav-links">
         <li><NavLink exact to="/">Home</NavLink></li>
