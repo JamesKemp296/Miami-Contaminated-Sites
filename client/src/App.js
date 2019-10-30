@@ -16,10 +16,10 @@ class App extends Component {
     return (
       <BrowserRouter>
       <Navbar/>
-      <Switch>   
+      <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/places/:placeId" component={SearchResults}/>
-        <Route path="/sites/:id" component={SingleResult} />
+        <Route exact path="/places/:placeId" component={SearchResults}/>
+        <Route path="/places/:placeId/sites/:id" component={SingleResult} />
         <Route path="/about" component={About} />
       </Switch>
       <Footer />

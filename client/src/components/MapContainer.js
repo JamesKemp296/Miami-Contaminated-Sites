@@ -22,15 +22,13 @@ export class MapContainer extends React.Component {
           
                   }}
             initialCenter={{
-                lat: 25.761681, //25.761681,
-                lng: -80.191788, //-80.191788
-              // this.props.place.geometry.location.lng
-    
+                lat: this.props.place.geometry.location.lat(),
+                lng: this.props.place.geometry.location.lng()
             }}
-            zoom={8}
+            zoom={15}
             onClick={this.onMapClicked}
         >
-   
+
          {this.displayMarkers()}
         </Map>
       );
