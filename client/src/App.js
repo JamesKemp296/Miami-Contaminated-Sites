@@ -4,11 +4,11 @@ import './App.css'
 import './index.css'
 import './results.css'
 import './About.css'
+import './home.css'
 import Home from './pages/Home'
 import SingleResult from './pages/SingleResult'
 import About from './pages/About'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
 import SearchResults from './pages/SearchResults'
 
 class App extends Component {
@@ -22,7 +22,6 @@ class App extends Component {
         <Route path="/places/:placeId/sites/:id" component={SingleResult} />
         <Route path="/about" component={About} />
       </Switch>
-      <Footer />
     </BrowserRouter>
     )
   }
