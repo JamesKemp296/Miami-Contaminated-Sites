@@ -4,7 +4,7 @@ import React from 'react'
 const About = () => (
   <div>
 
-  <h1 className="about-title">About Us</h1>
+  <h1 className="about-title">ABOUT US</h1>
 
   <div className="about">
     <a href="https://www.linkedin.com/in/annastepanova1811/">
