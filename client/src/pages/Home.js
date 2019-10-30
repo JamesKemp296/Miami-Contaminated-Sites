@@ -21,14 +21,23 @@ const Home = props => {
       from the active contaminated sites layer/list when the sites is found by DERM to be cleaned up.
       Updated monthly.
       </h3>
-      <Autocomplete className="autocomplete"
-      style={{width: '35%'}}
-      onPlaceSelected={goToSearchResultsForPlace}
-      types={['address']}
-      componentRestrictions={{ country: 'us' }}
-			/>
-    </div>
-      
+        <Autocomplete class="autocomplete"
+          style={{
+            width: '40%', 
+            height: '50px',
+            borderTopWidth: 0,
+            borderBottomWidth:0,
+            paddingLeft: '15px',
+            outline: 'none',
+            borderRadius: 50,
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}
+          onPlaceSelected={goToSearchResultsForPlace}
+          types={['address']}
+          componentRestrictions={{ country: 'us' }}
+        />
+      </div>      
     </div>
    </header>
 
