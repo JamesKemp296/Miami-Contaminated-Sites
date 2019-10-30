@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Result from '../components/Result'
-
+import MapContainer from '../components/MapContainer'
 class SearchResults extends React.Component {
   state = {
             place: { formatted_address: "Loading..." },
@@ -45,6 +45,7 @@ class SearchResults extends React.Component {
   render(){
     return(
       <>
+        <MapContainer />
         <div className="results-filters">
           <label htmlFor="radius-dropbox">Radius:</label>
           <select
