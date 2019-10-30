@@ -26,11 +26,11 @@ class SingleResult extends React.Component {
     }
     const permit = permitLookup[site.PERMITTYPE] || "Uknown";
     return(
-  <div className="single-list">
-   <div className="single-image">
-      <img src={`https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${site.HNUM}+${site.ST_NAME}+${site.PRE_DIR}+${site.ST_TYPE}+MIAMI+FL&heading=271&pitch=-0.76&key=AIzaSyDLun1DYQxp9IawieGnpd-4d0Jrp8sZSHU`} alt="contaminated site" />
+  <div className="wrapper">
+   <div>
+      <img className="single-image"src={`https://maps.googleapis.com/maps/api/streetview?size=800x800&location=${site.HNUM}+${site.ST_NAME}+${site.PRE_DIR}+${site.ST_TYPE}+MIAMI+FL&heading=271&pitch=-0.76&key=AIzaSyDLun1DYQxp9IawieGnpd-4d0Jrp8sZSHU`} alt="contaminated site" />
     </div>
-    <div className="single-description">
+    <div className="text-wrapper">
       <h1>{site.HNUM} {site.PRE_DIR} {site.ST_NAME} {site.ST_TYPE}</h1>
         <table>
           <tbody>
