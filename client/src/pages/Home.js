@@ -12,23 +12,22 @@ const Home = props => {
     </video>
     </div>
     <div className="header-overlay">
-    <div className="header-content">
-      <h1 className="title">CONTAMINATED SITE SEARCH</h1>
-      <h3 className="description">identifies properties where environmental contamination has been documented in the soil
-      or groundwater. Facilities get listed as a contaminated site by a DERM inspector who finds a violation on the
-      property.
-      Facilities that store potential contaminated materials are permitted and/or tracked by DERM. A site is removed
-      from the active contaminated sites layer/list when the sites is found by DERM to be cleaned up.
-      Updated monthly.
-      </h3>
-      <Autocomplete className="autocomplete"
-      style={{width: '35%'}}
-      onPlaceSelected={goToSearchResultsForPlace}
-      types={['address']}
-      componentRestrictions={{ country: 'us' }}
-			/>
-    </div>
-      
+      <div className="header-content">
+        <h1 className="title">CONTAMINATED SITE SEARCH</h1>
+        <h3 className="description">identifies properties where environmental contamination has been documented in the soil
+        or groundwater. Facilities get listed as a contaminated site by a DERM inspector who finds a violation on the
+        property.
+        Facilities that store potential contaminated materials are permitted and/or tracked by DERM. A site is removed
+        from the active contaminated sites layer/list when the sites is found by DERM to be cleaned up.
+        Updated monthly.
+        </h3>
+        <Autocomplete className="autocomplete"
+        style={{width: '35%'}}
+        onPlaceSelected={goToSearchResultsForPlace}
+        types={['address']}
+        componentRestrictions={{ country: 'us' }}
+        />
+      </div>
     </div>
    </header>
 
