@@ -7,7 +7,7 @@ const Home = props => {
 	return(
     <header className="v-header container">
     <div className="fullscreen-video-wrap">
-      <video loop autoPlay>
+      <video loop autoPlay muted>
       <source src="./video/bg.mp4" type="video/mp4" />
     </video>
     </div>

@@ -53,10 +53,15 @@ class SearchResults extends React.Component {
   render(){
     return(
       <>
-        <MapContainer 
-          mapPoints={this.state.mapPoints}
-          place={this.state.place}
-        />
+        <div style={{position: 'relative', minHeight: '400px', backgroundColor: 'azure', marginTop: '64px'}}>
+        {
+          this.state.place.geometry &&
+          <MapContainer
+            mapPoints={this.state.mapPoints}
+            place={this.state.place}
+          />
+        }
+        </div>
         <div className="results-filters">
           <label htmlFor="radius-dropbox">Radius:</label>
           <select
@@ -84,7 +89,7 @@ class SearchResults extends React.Component {
             <option value="ARP">Airports and Contracts</option>
           </select>
         </div>
-          <Result {...this.state}/>
+          <Result {...this.state} placeId={this.props.match.params.placeId}/>
         <div id="map"></div>
       </>
     )
