@@ -10,7 +10,7 @@ class SingleResult extends React.Component {
     const siteUrl =`https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/ContaminatedSite_gdb/FeatureServer/0/query?where=OBJECTID%20%3E%3D%20${siteId}%20AND%20OBJECTID%20%3C%3D%20${siteId}&outFields=*&outSR=4326&f=json`
     fetch(siteUrl)
     .then(response => response.json())
-    .then((data) => this.setState({site: data.features[0].attributes, loading: false}))
+    .then((data) => this.setState({site: data.features[0].attributes, loading: false, geometry: data.features[0].geometry}))
     .catch(err => console.error(err))
   }
   componentDidMount(){
@@ -30,7 +30,14 @@ class SingleResult extends React.Component {
     const permit = permitLookup[site.PERMITTYPE] || "Uknown";
     return(
     <>
-      <SinglePageMap site={this.state.site}/>
+    {
+      this.state.geometry.x &&
+      <SinglePageMap 
+        site={this.state.site}
+        geometry={this.state.geometry}
+      />
+    }
+     
       <div className="single-list">
       <div className="single-image">
           <img src={`https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${site.HNUM}+${site.ST_NAME}+${site.PRE_DIR}+${site.ST_TYPE}+MIAMI+FL&heading=271&pitch=-0.76&key=AIzaSyDLun1DYQxp9IawieGnpd-4d0Jrp8sZSHU`} alt="contaminated site" />
