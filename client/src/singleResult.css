@@ -1,0 +1,42 @@
+
+.wrapper {
+  margin-top: 110px;
+  background-color: white;
+  color: black;
+  box-shadow: 5px 10px 20px black;
+	box-shadow: 5px 10px 20px black;
+  max-width: 60vw;
+  display: grid;
+  justify-items: center;
+  margin-left: 310px;
+}
+
+.single-image {
+  width: 60vw;
+  height: 360px;
+  object-fit: cover;
+}
+
+table {
+  width: 150%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+
+
+.text-wrapper {
+  padding: 10px;
+  min-height: 300px;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  margin: 10px;
+  text-align: center;
+}
+
+
+
+
+
