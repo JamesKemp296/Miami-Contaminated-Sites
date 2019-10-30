@@ -8,7 +8,7 @@ const Home = props => {
     <header className="v-header container">
     <div className="fullscreen-video-wrap">
       <video loop autoPlay>
-      <source src="./video/Traffic.mp4" type="video/mp4" />
+      <source src="./video/bg.mp4" type="video/mp4" />
     </video>
     </div>
     <div className="header-overlay">
