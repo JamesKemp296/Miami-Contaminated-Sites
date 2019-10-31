@@ -5,11 +5,13 @@ export class MapContainer extends React.Component {
 
   displayMarkers = () => {
     return this.props.mapPoints.map((point, index) => {
-      return <Marker key={index} id={index} position={{
-       lat: point.lat,
-       lng: point.lon
-     }}
-     onClick={() => console.log("You clicked me!")} />
+      return <Marker  
+                key={index} id={index} 
+                position={{
+                  lat: point.lat,
+                  lng: point.lon
+                }}
+              />
     })
   }
 

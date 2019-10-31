@@ -15,14 +15,24 @@
 }
 
 .results-filters {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   place-items: center;
-  color: black;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
   margin-top: 20px;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  height: 64px;
+  margin-bottom: 20px;
 }
 
 .totalResults {
-  color: black;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  padding: 20px;
 }
 
 .google-image{
@@ -34,5 +44,26 @@
   min-height: 300px;
 }
 
+select {
+  max-width: 200px;
+  border: none;
+  background-color: white;
+  font-size: 1.1rem;
+}
+
+select option:hover{
+  background-color: cornflowerblue;
+}
+
+#filtersDiv {
+  color: white;
+  padding: 20px;
+}
+
+label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  margin-right: 5px;
+}
 
 

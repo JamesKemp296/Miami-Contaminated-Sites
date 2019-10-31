@@ -4,7 +4,7 @@ import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
 export class SinglePageMap extends React.Component {
 
     render() {
-        console.log(this.props.geometry.y)
+        console.log(this.props)
       return (
         <Map
             google={this.props.google}
@@ -19,7 +19,10 @@ export class SinglePageMap extends React.Component {
             zoom={15}
             onClick={this.onMapClicked}
         >
-            <Marker position={{ lat: Number(this.props.site.LAT), lng: Number(this.props.site.LON)}} />
+            <Marker 
+                position={{ lat: Number(this.props.site.LAT), lng: Number(this.props.site.LON)}} 
+                title={`${this.props.site.HNUM} ${this.props.site.PRE_DIR} ${this.props.site.ST_NAME} ${this.props.site.ST_TYPE}`}
+            />
         </Map>
       );
     }

@@ -59,37 +59,17 @@ class SearchResults extends React.Component {
           <MapContainer
             mapPoints={this.state.mapPoints}
             place={this.state.place}
+            sites={this.state.sites}
           />
         }
         </div>
-        <div className="results-filters">
-          <label htmlFor="radius-dropbox">Radius:</label>
-          <select
-            id="radius-dropbox"
-            value={this.state.radiusMiles}
-            onChange={this.handleRadiusChange}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-          <label htmlFor="permit">Type of contamination:</label>
-          <select
-            id="permit"
-            value={this.state.permit}
-            onChange={this.handlePermitChange}
-          >
-            <option value="all">All</option>
-            <option value="UT">Storage Tanks</option>
-            <option value="IW5">Industrial Waste</option>
-            <option value="HWR">Hazardous Waste Removal</option>
-            <option value="SW">Solid Waste</option>
-            <option value="IW">Industrial Waste</option>
-            <option value="AW">Waste</option>
-            <option value="ARP">Airports and Contracts</option>
-          </select>
-        </div>
-          <Result {...this.state} placeId={this.props.match.params.placeId}/>
+       
+          <Result 
+            {...this.state} 
+            placeId={this.props.match.params.placeId}
+            handlePermitChange={this.handlePermitChange}
+            handleRadiusChange={this.handleRadiusChange}
+          />
         <div id="map"></div>
       </>
     )
