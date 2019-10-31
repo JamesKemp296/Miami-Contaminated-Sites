@@ -14,12 +14,9 @@ const Home = props => {
     <div className="header-overlay">
       <div className="header-content">
         <h1 className="title">CONTAMINATED SITE SEARCH</h1>
-        <p className="description">Identifies properties where environmental contamination has been documented in the soil
-        or groundwater. Facilities get listed as a contaminated site by a DERM inspector who finds a violation on the
-        property.
-        Facilities that store potential contaminated materials are permitted and/or tracked by DERM. A site is removed
-        from the active contaminated sites layer/list when the sites is found by DERM to be cleaned up.
-        Updated monthly.
+        <p className="description">
+        This tool allows Miami-Dade residents to view designated areas where environmental contamination has been documented in 
+        the soil or groundwater. Updated monthly. 
         </p>
         <Autocomplete className="autocomplete"
         style={{width: '35%'}}

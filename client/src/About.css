@@ -1,6 +1,10 @@
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800);
 
+.about-wrapper {
+  margin-top: 70px;
+}
+
 .about {
   font-family: 'Raleway', Arial, sans-serif;
   background-color: transparent;
@@ -14,10 +18,10 @@
 }
 
 .about-title {
-  font-family: 'Raleway', Arial, sans-serif;
+  font-family: 'Josefin-Sans', sans-serif;
   background-color: transparent;
   text-align: center;
-  color: whitesmoke;
+  color: #0a212f;
 }
 figure.snip1104 {
   font-family: 'Raleway', Arial, sans-serif;
