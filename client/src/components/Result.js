@@ -19,9 +19,9 @@ const Result = (props) => {
 						value={props.radiusMiles}
 						onChange={props.handleRadiusChange}
 					>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
+						<option value="1">1 Mile</option>
+						<option value="2">2 Miles</option>
+						<option value="3">3 Miles</option>
 					</select>
 					<label htmlFor="permit">Type of contamination:</label>
 					<select
