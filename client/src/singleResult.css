@@ -1,6 +1,7 @@
 
 .wrapper {
-  margin-top: 110px;
+  margin-top: 70px;
+  margin-bottom: 60px;
   background-color: white;
   color: black;
   box-shadow: 5px 10px 20px black;
@@ -13,7 +14,7 @@
 
 .single-image {
   width: 60vw;
-  height: 360px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -27,7 +28,7 @@ table {
 
 .text-wrapper {
   padding: 10px;
-  min-height: 300px;
+  height: 200px;
   font-family: 'Poppins', sans-serif;
 }
 

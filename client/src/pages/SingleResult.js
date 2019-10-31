@@ -30,13 +30,15 @@ class SingleResult extends React.Component {
     const permit = permitLookup[site.PERMITTYPE] || "Uknown";
     return(
     <>
+      <div style={{ position: 'relative', minHeight: '400px', backgroundColor: 'azure', marginTop: '64px' }}>
     {
       this.state.geometry.x &&
-      <SinglePageMap 
+      <SinglePageMap
         site={this.state.site}
         geometry={this.state.geometry}
       />
     }
+    </div>
      
       <div className="wrapper">
       <div>
