@@ -1,0 +1,19 @@
+
+.sitemap > iframe { position:fixed; display:block; width:100%; border:none; }
+
+.sitemap{
+  margin:0; 
+  padding:0; 
+  height:100%; 
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.sitemap{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
